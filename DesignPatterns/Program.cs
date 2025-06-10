@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DesignPatterns.Behavioral.Strategy;
 using DesignPatterns.Creational.Factory;
+using DesignPatterns.Structural.Decorator.MultipleDecorators;
 using DesignPatterns.Structural.Decorator.TheFirstExample;
 using static DesignPatterns.Behavioral.Strategy.Strategy;
 
@@ -28,6 +29,8 @@ switch(keyInfo.KeyChar)
         Console.WriteLine("You chose Decorator Pattern.");
         // Implement Decorator pattern example here
         DecoratorExample();
+        Console.WriteLine("Demonstrating multiple decorators...");
+        MultipleDecoratorExample();
         break;
     default:
         Console.WriteLine("Invalid choice. Exiting...");
@@ -126,4 +129,45 @@ static void DecoratorExample()
 
     var mySuperDecorator = new MyDecorator(myDecorator);
     Console.WriteLine(mySuperDecorator.GetDescription());
+}
+
+static void MultipleDecoratorExample()
+{
+    LogComponent logComponent = new LogComponent();
+    logComponent.LogMessage("This is a simple log message.");
+    logComponent.LogWarning("This is a warning message.");
+    logComponent.LogError("This is an error message.");
+    Console.WriteLine("Using multiple decorators:");
+
+    OutroMultipleDecoratorMethod();
+    AnotherMultipleDecoratorMethod();
+
+    Console.WriteLine("Now for the next method we need to Log it including different behaviour");
+    DifferentMultipleDecoratorMethod();
+    Console.WriteLine("End of multiple decorators example.");
+}
+
+static void OutroMultipleDecoratorMethod()
+{
+    var outroLog = new LogComponent();
+    outroLog.LogMessage("This is a message from the outro log component.");
+}
+
+
+static void AnotherMultipleDecoratorMethod()
+{
+    Console.WriteLine("Bla bla bla");
+    var log = new LogComponent();
+    log.LogWarning("ANOTHER log component.");
+}
+
+///This need to use a decorator to log the message differently
+static void DifferentMultipleDecoratorMethod()
+{
+    Console.WriteLine("Bla bla bla");
+    var log = new LogComponent();
+    //In this case when Warning we need to write notify by email. All the other methods and classes don't need this, just in this case.
+    EmailNotificationDecorator emailDecorator = new EmailNotificationDecorator(log);
+    // Here we are using the decorator to log the message with email notification
+    emailDecorator.LogWarning("ANOTHER log component with email notification.");
 }
