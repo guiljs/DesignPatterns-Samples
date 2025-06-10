@@ -38,9 +38,9 @@ namespace DesignPatterns.Behavioral.Strategy
             }
         }
 
-        public class  SuperDiscountStrategy : IDiscountStrategy
+        public class SuperDiscountStrategy : IDiscountStrategy
         {
-            public decimal ApplyDiscount (decimal price)
+            public decimal ApplyDiscount(decimal price)
             {
                 Console.WriteLine("****** Applying super discount strategy. *******");
                 return price * 0.95m;

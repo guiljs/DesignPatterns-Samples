@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DesignPatterns.Behavioral.Strategy;
 using DesignPatterns.Creational.Factory;
+using DesignPatterns.Structural.Decorator.TheFirstExample;
 using static DesignPatterns.Behavioral.Strategy.Strategy;
 
 Console.WriteLine("Hello, World!");
@@ -9,6 +10,7 @@ Console.WriteLine("Choose a design pattern to demonstrate:");
 Console.WriteLine("1. Factory Pattern");
 Console.WriteLine("Press '1' to demonstrate the Factory Pattern...");
 Console.WriteLine("Press '2' to demonstrate Strategy Pattern ...");
+Console.WriteLine("Press '3' to demonstrate the Decorator Pattern...");
 ConsoleKeyInfo keyInfo = Console.ReadKey();
 Console.WriteLine(); // Move to the next line after key press
 
@@ -21,6 +23,11 @@ switch(keyInfo.KeyChar)
     case '2':
         Console.WriteLine("You chose Strategy Pattern.");
         StrategyExample();
+        break;
+    case '3':
+        Console.WriteLine("You chose Decorator Pattern.");
+        // Implement Decorator pattern example here
+        DecoratorExample();
         break;
     default:
         Console.WriteLine("Invalid choice. Exiting...");
@@ -103,4 +110,20 @@ static void StrategyExample()
 
 
     
+}
+
+static void DecoratorExample()
+{
+    // Example usage of the Decorator pattern
+    Console.WriteLine("Creating products using the Decorator pattern...");
+    Console.WriteLine("--------------------------------------------------");
+    // Implement Decorator pattern example here
+    MyOldComponentThatICantChange myOldComponentThatICantChange = new MyOldComponentThatICantChange();
+    Console.WriteLine(myOldComponentThatICantChange.GetDescription());
+
+    MyDecorator myDecorator = new MyDecorator(myOldComponentThatICantChange);
+    Console.WriteLine(myDecorator.GetDescription());
+
+    var mySuperDecorator = new MyDecorator(myDecorator);
+    Console.WriteLine(mySuperDecorator.GetDescription());
 }
