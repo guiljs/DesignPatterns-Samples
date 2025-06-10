@@ -8,18 +8,23 @@ namespace DesignPatterns.Structural.Decorator.MultipleDecorators
 {
     public class LogComponent : ILogComponent
     {
+        private readonly string _prefix;
+        public LogComponent(string prefix = "Log")
+        {
+            _prefix = prefix;
+        }
         public void LogMessage(string message)
         {
-            Console.WriteLine($"Log: {message}");
+            Console.WriteLine($"{_prefix} Message: {message}");
         }
 
         public void LogWarning(string warning)
         {
-            Console.WriteLine($"***** Warning: {warning} *****");
+            Console.WriteLine($"{_prefix} ***** Warning: {warning} *****");
         }
         public void LogError(string error)
         {
-            Console.WriteLine($"Error: {error}");
+            Console.WriteLine($"{_prefix} Error: {error}");
         }
     }
 

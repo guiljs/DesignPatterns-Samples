@@ -149,7 +149,7 @@ static void MultipleDecoratorExample()
 
 static void OutroMultipleDecoratorMethod()
 {
-    var outroLog = new LogComponent();
+    var outroLog = new LogComponent("Outro");
     outroLog.LogMessage("This is a message from the outro log component.");
 }
 
@@ -157,7 +157,7 @@ static void OutroMultipleDecoratorMethod()
 static void AnotherMultipleDecoratorMethod()
 {
     Console.WriteLine("Bla bla bla");
-    var log = new LogComponent();
+    var log = new LogComponent("Another bla bla");
     log.LogWarning("ANOTHER log component.");
 }
 
@@ -165,9 +165,10 @@ static void AnotherMultipleDecoratorMethod()
 static void DifferentMultipleDecoratorMethod()
 {
     Console.WriteLine("Bla bla bla");
-    var log = new LogComponent();
+    var log = new LogComponent("Different");
     //In this case when Warning we need to write notify by email. All the other methods and classes don't need this, just in this case.
-    EmailNotificationDecorator emailDecorator = new EmailNotificationDecorator(log);
+    var emailWarningLogger = new EmailNotificationDecorator(log);
     // Here we are using the decorator to log the message with email notification
-    emailDecorator.LogWarning("ANOTHER log component with email notification.");
+    emailWarningLogger.LogWarning("ANOTHER log component with email notification.");
+    emailWarningLogger.LogError("This is an error message.");
 }
